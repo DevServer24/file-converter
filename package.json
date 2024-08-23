@@ -8,6 +8,7 @@
     "start": "nodemon src/index.ts"
    
   },
+  "vercel":"echo",
   "keywords": [],
   "author": "",
   "license": "ISC",
