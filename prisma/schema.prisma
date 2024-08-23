@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id            String          @id @db.Uuid
+  firstName     String?
+  lastName      String?
+  address       String?
+  birthday      DateTime?
+  houseNumber   String?
+  city          String?
+  country       String?
+  phoneNumber   Int?
+  cellPhone     Int?
+  userdataId    String?         @db.Uuid
+  imageAvatar   String?
+  userdata      userdata?       @relation(fields: [userdataId], references: [id])
+  Educational   Educational[]
+  Specialskills Specialskills[]
+}
+
+model Educational {
+  id           String   @id @db.Uuid
+  nameofschool String?
+  course       String?
+  yearsofstudy String?
+  accountId    String?  @db.Uuid
+  Account      Account? @relation(fields: [accountId], references: [id])
+}
+
+model Specialskills {
+  id          String   @id @db.Uuid
+  name        String?
+  description String?
+  accountId   String?  @db.Uuid
+  Account     Account? @relation(fields: [accountId], references: [id])
+}
+
+model userdata {
+  id         String    @id @default(uuid()) @db.Uuid
+  created_at DateTime  @default(now()) @db.Timestamp(6)
+  email      String    @db.VarChar(500)
+  name       String    @db.VarChar(500)
+  password   String    @db.VarChar(500)
+  
+  role       Role      @default(USER)
+  Account    Account[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
