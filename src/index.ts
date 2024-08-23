@@ -13,7 +13,11 @@ const app = express()
 const port = process.env.PORT || 3000
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:4000',
+
+
+
+
+    origin: 'https://file-converter-nine.vercel.app',
     credentials: true,
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
