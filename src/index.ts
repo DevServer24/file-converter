@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import SignUpController from './controllers/sign-up.controllers'
 import SignInController from './controllers/sign-in.controller'
+import { Request,Response } from 'express'
 dotenv.config()
 
 
@@ -17,7 +18,7 @@ app.use(cors({
 
 
 
-    origin: 'https://file-converter-nine.vercel.app',
+    origin: process.env.DATA_URL,
     credentials: true,
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -26,7 +27,7 @@ app.use(cors({
     
 
 }))
-app.get('/', (req, res) => {
+app.get('/', (req:Request, res:Response) => {
     res.send('Hello World!')
 })
 app.post('/sign-up',SignUpController)
